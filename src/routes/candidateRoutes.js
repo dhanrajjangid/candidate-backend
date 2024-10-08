@@ -8,7 +8,7 @@ router.put("/update/:id", candidateController.updateCandidate);
 
 router.delete("/delete/:id", candidateController.deleteCandidate);
 
-router.get("/", candidateController.getAllCandidates);
+router.get("/getCandidates", candidateController.getAllCandidates);
 
 router.get("/:id", candidateController.getCandidateById);
 
