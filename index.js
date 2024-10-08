@@ -5,6 +5,7 @@ const cors = require("cors");
 const candidateRoutes = require("./src/routes/candidateRoutes");
 const chatRoutes = require("./src/routes/chatRoutes");
 const authRoutes = require("./src/routes/authRoutes");
+const applicationRoutes = require("./src/routes/applicationRoutes");
 const http = require("http"); // HTTP core module
 const initializeWebSocket = require("./websocket"); // Import the WebSocket logic
 
@@ -27,6 +28,7 @@ app.use(cors());
 // Routes
 app.use("/auth", authRoutes);
 app.use("/candidate", candidateRoutes);
+app.use("/application", applicationRoutes);
 app.use("/chat", chatRoutes);
 
 // Create an HTTP server with Express
