@@ -4,8 +4,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const candidateRoutes = require("./src/routes/candidateRoutes");
 const chatRoutes = require("./src/routes/chatRoutes");
-const http = require('http'); // HTTP core module
-const initializeWebSocket = require('./websocket'); // Import the WebSocket logic
+const authRoutes = require("./src/routes/authRoutes");
+const http = require("http"); // HTTP core module
+const initializeWebSocket = require("./websocket"); // Import the WebSocket logic
 
 require("dotenv").config(); // Load environment variables from .env
 
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
+app.use("/auth", authRoutes);
 app.use("/candidate", candidateRoutes);
 app.use("/chat", chatRoutes);
 
