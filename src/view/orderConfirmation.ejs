@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - Shop Minimal</title>
+  <style>
+    /* Basic styles */
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+    h1, p {
+      margin: 10px 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .order-details {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .order-details img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .order-details .info {
+      flex: 1;
+    }
+    /* Media query for smaller screens */
+    @media only screen and (max-width: 600px) {
+      .order-details {
+        flex-direction: column;
+      }
+      .order-details img {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="your-logo.png" alt="Buy Minimal" style="max-width: 150px; margin-bottom: 20px;">
+    <h1>Thank you for your order!</h1>
+    <p>Dear <%= order.address.name %>,</p>
+    <p>This email confirms your recent order on Buy Minimal. <br /> (Order ID: <%= order._id %>).</p>
+    <p><b>Order Details:</b></p>
+    <ul class="order-details">
+      <% for (const item of order.items) { %>
+        <li>
+          <img src="<%= item.image %>" alt="<%= item.name %>">
+          <div class="info">
+            <p><%= item.name %></p>
+            <p>(Quantity: <%= item.quantity %>)</p>
+          </div>
+        </li>
+      <% } %>
+    </ul>
+    <p><b>Total amount:</b>USD <%= order.amount ? order.amount.toFixed(2) : 0 %></p>
+    <p><b>Payment method:</b> <%= order.paymentMethod %></p>
+    <p><b>Billing address:</b></p>
+    <ul>
+      <li><%= order.address.name %></li>
+      <li><%= order.address.phoneNumber %></li>
+      <li><%= order.address.addressLine1 %></li>
+      <% if (order.address.addressLine2) { %>
+        <li><%= order.address.addressLine2 %></li>
+      <% } %>
+      <li><%= order.address.city %>, <%= order.address.state %> <%= order.address.postalCode %></li>
+      <li><%= order.address.country %></li>
+      <% if (order.address.email) { %>
+        <li><b>Email:</b> <%= order.address.email %></li>
+      <% } %>
+    </ul>
+    <p>We will ship your order as soon as possible. You will receive a notification with tracking information once your order is shipped.</p>
+    <p>Thank you for choosing Buy Minimal! If you have any questions, please don't hesitate to contact us. at <br />Email: jangiddhanraj376@gmail.com or <br />Phone: +91 9685010351</p>
+    <p>Sincerely,</p>
+    <p><b>Dhanraj Jangid</b></p>
+    <p>Buy Minimal Team</p>
+  </div>
+</body>
+</html>
