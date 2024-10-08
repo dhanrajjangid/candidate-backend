@@ -39,7 +39,7 @@ const registerPlayer = async (req, res) => {
   try {
     const { name, email, password, admin } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const existingPlayer = await Player.findOne({ email });
+    const existingPlayer = await Candidate.findOne({ email });
     if (existingPlayer) {
       return res
         .status(400)
@@ -71,7 +71,7 @@ const registerPlayer = async (req, res) => {
     );
 
     res.json({
-      message: "Player registered successfully",
+      message: "User registered successfully",
       data: {
         email: newPlayer.email,
         name: newPlayer.name,
@@ -82,7 +82,7 @@ const registerPlayer = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to register player", error: error.message });
+      .json({ message: "Failed to register user", error: error.message });
   }
 };
 
@@ -105,7 +105,7 @@ const loginPlayer = async (req, res) => {
     });
 
     res.json({
-      message: "Player logged in successfully",
+      message: "User logged in successfully",
       data: {
         email: player.email,
         name: player.name,
@@ -116,7 +116,7 @@ const loginPlayer = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Failed to login player", error: error.message });
+      .json({ message: "Failed to login User", error: error.message });
   }
 };
 
@@ -127,7 +127,7 @@ const forgotPassword = async (req, res) => {
     if (!player) {
       return res
         .status(404)
-        .json({ message: "Player not found with this email" });
+        .json({ message: "User not found with this email" });
     }
     const resetToken = jwt.sign(
       { playerId: player._id },
